@@ -9,9 +9,7 @@ function findNaughtyStep(original = '', modified = '') {
             extraLetter = modifiedChain[i]
             break;
         }
-
     }
-
     return extraLetter
 }
 
