@@ -6,6 +6,7 @@ const giftIds3 = [5, 1, 5, 1]
 function findFirstRepeated(gifts = []) {
     const seen = []
     for (let num of gifts) {
+        console.log(seen)
         if (seen.includes(num)) return num
         seen.push(num)
     }
