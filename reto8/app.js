@@ -1,6 +1,6 @@
 function organizeGifts(gifts = '') {
-    const BREAKPOINT_LETTER = /[a-z]/
-    const BREAKPOINT_NUMBER = /\d/
+    const BREAKPOINT = /(\d+[a-z])/g
+    const resultBreakpoint = gifts.match(BREAKPOINT)
 
     const CAJA = 10
     const PALE = 5
@@ -8,52 +8,40 @@ function organizeGifts(gifts = '') {
 
     let result = ''
 
-    const gifsSplitedbyNumber = gifts
-        .split(BREAKPOINT_LETTER)
-        .filter(el => el != '')
-    const gifsSplitedbyLetter = gifts
-        .split(BREAKPOINT_NUMBER)
-        .filter(el => el != '')
-
-    for (let i = 0; i < gifsSplitedbyNumber.length; i++) {
-
-        const LETTER = gifsSplitedbyLetter[i]
-        const NUMBER = gifsSplitedbyNumber[i]
+    for (let i = 0; i < resultBreakpoint.length; i++) {
+        const LETTER = resultBreakpoint[i].slice(-1)
+        const NUMBER = Number(resultBreakpoint[i].slice(0, -1))
         const PALEVALUE = `[${LETTER}]`
         const CAJAVALUE = `{${LETTER}}`
 
-        let resultPale = 0, resultCaja = 0, resultBolsa = 0
         const resultCajas = Math.floor(Number(NUMBER) / CAJA)
+
+        let resultPale = 0, resultCaja = resultCajas, resultBolsa = 0
 
         if (resultCajas >= PALE) {
             resultPale = Math.floor(resultCajas / PALE)
             resultCaja = resultCajas - (resultPale * PALE)
-        } else {
-            resultCaja = resultCajas
         }
 
         resultBolsa = Number(NUMBER)
             - (resultPale * VALUE_PALE)
             - (resultCaja * CAJA)
 
-        if (resultBolsa < 0) resultBolsa = 0
-
         result += PALEVALUE.repeat(resultPale) + CAJAVALUE.repeat(resultCaja)
 
-        if (resultBolsa > 0) result += `(${LETTER.repeat(resultBolsa)})`
-
+        if (resultBolsa <= 0) resultBolsa = 0
+        else result += `(${LETTER.repeat(resultBolsa)})`
         // console.log('Cant Pales', resultPale, 'Cant cajas', resultCaja, 'Cant bolsa', resultBolsa)
     }
-
     return result
 }
 
 
-// const result1 = organizeGifts(`76a11b`)
+const result1 = organizeGifts(`76a11b`)
 // const result2 = organizeGifts("70b120a4c")
 // const result3 = organizeGifts("9c")
 // const result4 = organizeGifts("70b120a4c")
-const result5 = organizeGifts("19d51e")
+// const result5 = organizeGifts("19d51e")
 
 
 const caja = '{}' //!Cada 10
