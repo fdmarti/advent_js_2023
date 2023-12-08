@@ -3,12 +3,7 @@ const materials = 'jlepuz'
 
 function manufacture(gifts = [], materials = '') {
     return gifts.filter(gift => {
-        const result = gift.split('').map(el => {
-            if (!materials.includes(el)) return false
-            return true
-        })
-
-        return result.every(el => el === true)
+        return gift.split('').every(el => materials.includes(el))
     })
 }
 

@@ -4,21 +4,22 @@ function cyberReindeer(road = '', time = 0) {
         modifiedRoad
     const result = [copyRoad]
 
-    for (let i = 1; i <= time - 1; i++) {
-        if (i > 4) copyRoad = copyRoad.replaceAll('|', '*')
+    for (let i = 0; i <= time; i++) {
+        if (i > 3) copyRoad = copyRoad.replaceAll('|', '*')
 
         if (copyRoad[flag] === '|') result.push(modifiedRoad)
         else {
             const changedArray = copyRoad.split('')
             changedArray[flag] = 'S'
-            changedArray[0] = '.'
             const joindedArray = changedArray.join('')
             modifiedRoad = joindedArray
             result.push(joindedArray)
             flag++
         }
     }
-    return result
+
+    console.log(result.slice(0,time))
+    return result.slice(0,time)
 }
 
 const road = 'S..|...|..'
