@@ -1,29 +1,27 @@
 function cyberReindeer(road = '', time = 0) {
-    let copyRoad = road,
-        flag = 1,
-        modifiedRoad
-    const result = [copyRoad]
+    const SANTA = 'S'
+    let copyRoad = road, flag = 1, modified = copyRoad
 
-    for (let i = 0; i <= time; i++) {
-        if (i > 3) copyRoad = copyRoad.replaceAll('|', '*')
+    const result = [road]
+    copyRoad = copyRoad.replace('S', '.')
 
-        if (copyRoad[flag] === '|') result.push(modifiedRoad)
+    for (let i = 1; i <= time - 1; i++) {
+        if (i > 4) copyRoad = copyRoad.replaceAll('|', '*');
+        if (copyRoad[flag] === '|') result.push(modified)
         else {
-            const changedArray = copyRoad.split('')
-            changedArray[flag] = 'S'
-            const joindedArray = changedArray.join('')
-            modifiedRoad = joindedArray
-            result.push(joindedArray)
+            const firstPart = copyRoad.substring(0, flag)
+            const lastPart = copyRoad.substring(flag + 1)
+
+            modified = firstPart + SANTA + lastPart
+            result.push(modified)
             flag++
         }
     }
-
-    console.log(result.slice(0,time))
-    return result.slice(0,time)
+    return result
 }
 
 const road = 'S..|...|..'
 const road2 = 'S..||..|..'
 
 const time = 10 // unidades de tiempo
-const result = cyberReindeer(road, time)
+const result = cyberReindeer(road2, time)
