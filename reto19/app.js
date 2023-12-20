@@ -8,6 +8,7 @@ function revealSabotage(store = []) {
         for (let y = 0; y < store[i].length; y++) {
 
             if (store[i][y] === '*') {
+
                 store[i][y + 1] && (store[i][y + 1] = sumParts(store[i][y + 1])); //Suma Derecha
                 store[i][y - 1] !== undefined && (store[i][y - 1] = sumParts(store[i][y - 1])); //Suma izquierda
 
