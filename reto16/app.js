@@ -1,17 +1,15 @@
-function transformTree(tree = []) {
-    const hashMap = tree.map(number => {
-        if (  number === null) return null
+function transformTree(tree) {
+    function generateTree(index) {
+        if (tree[index] == null) return null
         return {
-            value: number,
-            left: {},
-            right: {}
+            value: tree[index],
+            left: generateTree(index * 2 + 1),
+            right: generateTree(index * 2 + 2),
         }
-    })
-
-    console.log(hashMap)
+    }
+    const RESULT = generateTree(0)
+    return RESULT
 }
-
-
 
 
 

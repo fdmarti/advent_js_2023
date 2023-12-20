@@ -1,24 +1,16 @@
 function optimizeIntervals(intervals = []) {
     const ARRAY_VALUES = []
     const SORTED_ARRAY = intervals.sort((a, b) => a[0] - b[0])
-    let min = SORTED_ARRAY[0][0], max = SORTED_ARRAY[0][1];
+    let [min, max] = SORTED_ARRAY[0]
 
     for (let i = 1; i < SORTED_ARRAY.length; i++) {
-        const start = SORTED_ARRAY[i][0];
-        const finish = SORTED_ARRAY[i][1]
-        let prevMax;
+        const [start, finish] = SORTED_ARRAY[i]
 
-        if (max < finish ) {
-            prevMax = max
-            max = finish
-
-            if ( start > prevMax ){
-                ARRAY_VALUES.push([min, prevMax])
-                min = start
-
-            }
+        if (max < start) {
+            ARRAY_VALUES.push([min, max]);
+            min = start;
         }
-
+        max = Math.max(max, finish);
     }
 
     ARRAY_VALUES.push([min, max])

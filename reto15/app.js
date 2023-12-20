@@ -4,24 +4,22 @@ function autonomousDrive(store = [], movements = []) {
     const RESULT = []
     let ST_ARR = store.join('').split('')
 
+    const obj = {
+        'R': (pos) => ST_ARR[pos + 1] !== OBSTACLE &&
+            ([ST_ARR[pos], ST_ARR[pos + 1]] = [ST_ARR[pos + 1], ST_ARR[pos]]),
+        'L': (pos) => ST_ARR[pos - 1] !== OBSTACLE &&
+            ([ST_ARR[pos], ST_ARR[pos - 1]] = [ST_ARR[pos - 1], ST_ARR[pos]]),
+        'D': (pos) => (ST_ARR[HALF_STORE + pos] !== OBSTACLE &&
+            !!ST_ARR[HALF_STORE + pos]) &&
+            ([ST_ARR[pos], ST_ARR[HALF_STORE + pos]] = [ST_ARR[(HALF_STORE + pos)], ST_ARR[pos]]),
+        'U': (pos) => ST_ARR[pos - HALF_STORE] !== OBSTACLE &&
+            ([ST_ARR[pos], ST_ARR[pos - HALF_STORE]] = [ST_ARR[pos - HALF_STORE], ST_ARR[pos]])
+    }
+
 
     for (let move of movements) {
         let robotPoss = ST_ARR.indexOf('!')
-
-        if (move === 'R' && ST_ARR[robotPoss + 1] !== OBSTACLE) {
-            [ST_ARR[robotPoss], ST_ARR[robotPoss + 1]] = [ST_ARR[robotPoss + 1], ST_ARR[robotPoss]]
-        }
-        if (move === 'L' && ST_ARR[robotPoss - 1] !== OBSTACLE) {
-            [ST_ARR[robotPoss], ST_ARR[robotPoss - 1]] = [ST_ARR[robotPoss - 1], ST_ARR[robotPoss]]
-        }
-        if (move === 'D' &&
-            ST_ARR[HALF_STORE + robotPoss] !== OBSTACLE && !!ST_ARR[HALF_STORE + robotPoss]) {
-            [ST_ARR[robotPoss], ST_ARR[HALF_STORE + robotPoss]] = [ST_ARR[(HALF_STORE + robotPoss)], ST_ARR[robotPoss]]
-        }
-        if (move === 'U' &&
-            ST_ARR[robotPoss - HALF_STORE] !== OBSTACLE) {
-            [ST_ARR[robotPoss], ST_ARR[robotPoss - HALF_STORE]] = [ST_ARR[robotPoss - HALF_STORE], ST_ARR[robotPoss]]
-        }
+        obj[move](robotPoss)
     }
 
     const ST_ARR_JOINED = ST_ARR.join('')
