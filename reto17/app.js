@@ -3,8 +3,8 @@ function optimizeIntervals(intervals = []) {
     const SORTED_ARRAY = intervals.sort((a, b) => a[0] - b[0])
     let [min, max] = SORTED_ARRAY[0]
 
-    for (let i = 1; i < SORTED_ARRAY.length; i++) {
-        const [start, finish] = SORTED_ARRAY[i]
+    for (let number of SORTED_ARRAY) {
+        const [start, finish] = number
 
         if (max < start) {
             ARRAY_VALUES.push([min, max]);

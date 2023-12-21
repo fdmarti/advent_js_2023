@@ -17,12 +17,12 @@ function drawGift(size = 1, symbol = '"') {
     let rightSide = 0;
 
     for (let i = HALF_SIZE; i > 0; i--) {
-        resp += EMPTY.repeat(i) + 
-            LINE + 
-            SYMBOLREP + 
-            LINE + 
+        resp += EMPTY.repeat(i) +
+            LINE +
+            SYMBOLREP +
+            LINE +
             symbol.repeat(rightSide) +
-            LINE + 
+            LINE +
             JUMP;
         rightSide++;
     }

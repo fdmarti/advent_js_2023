@@ -1,11 +1,12 @@
 function maxGifts(houses = []) {
     const maxSum = [houses[0], Math.max(houses[0], houses[1])]
+    const LAST_INDEX = houses.length - 1
 
     for (let i = 2; i < houses.length; i++) {
         maxSum.push(Math.max(maxSum[i - 1], maxSum[i - 2] + houses[i]))
     }
 
-    return maxSum[maxSum.length]
+    return maxSum.at(LAST_INDEX)
 }
 
 

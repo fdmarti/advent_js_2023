@@ -1,12 +1,11 @@
 function maxDistance(movements = '') {
-    const movementsArr = movements.split('')
     let amountMovements = 0, bonus = 0
-    movementsArr.forEach(el => {
-        if (el === '>') amountMovements++
-        else if (el === '*') bonus++
-        else amountMovements--
-    })
 
+    for (let move of movements) {
+        if (move === '>') amountMovements++
+        else if (move === '*') bonus++
+        else amountMovements--
+    }
     return Math.abs(amountMovements) + bonus
 }
 
